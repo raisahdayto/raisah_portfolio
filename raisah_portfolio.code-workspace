@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Dayto_Portfolio"
+		},
+		{
+			"path": "../booking_system/user"
+		}
+	],
+	"settings": {}
+}
