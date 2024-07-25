@@ -495,6 +495,22 @@ a:active {
   color: #6c757d;
 }
 
+#carouselModal .modal-content {
+  border: none;
+  /* Remove border */
+  border-radius: 0;
+  /* Remove border-radius if you don't want rounded corners */
+  box-shadow: none;
+  /* Remove box-shadow */
+  background: transparent;
+  /* Remove background color if needed */
+}
+
+#carouselModal .modal-body {
+  padding: 0;
+  /* Remove padding if you want a flush fit */
+}
+
 /* Center the modal vertically and horizontally */
 #carouselModal .modal-dialog {
   display: flex;
