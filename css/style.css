@@ -495,53 +495,35 @@ a:active {
   color: #6c757d;
 }
 
-/* Modal Styles */
-.modal .modal-dialog {
-  max-width: 90%;
-}
-
-.modal .modal-content {
-  border-radius: 0;
-}
-
-.modal .modal-header {
-  border-bottom: none;
-}
-
-.modal .modal-body {
-  padding: 0;
-}
-
-.modal .modal-body .owl-carousel .item img {
-  width: 100%;
-  height: auto;
-}
-
-/* Carousel Styles */
-.owl-carousel .item {
-  position: relative;
-}
-
-.owl-carousel .owl-nav button {
-  background-color: #007bff;
-  border: none;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 18px;
-  line-height: 1;
-  width: 40px;
-  height: 40px;
+/* Center the modal vertically and horizontally */
+#carouselModal .modal-dialog {
   display: flex;
   align-items: center;
+  /* Vertically center */
   justify-content: center;
-  opacity: 0.7;
-  transition: opacity 0.3s;
+  /* Horizontally center */
+  max-width: 50%;
+  /* Adjust as needed */
 }
 
-.owl-carousel .owl-nav button:hover {
-  opacity: 1;
+#carouselModal .modal-content {
+  height: auto;
+  /* Ensure height adjusts with content */
 }
 
+@media (min-width: 768px) {
+  #carouselModal .modal-dialog {
+    max-width: 40%;
+    /* For medium and larger screens */
+  }
+}
+
+@media (max-width: 767px) {
+  #carouselModal .modal-dialog {
+    max-width: 100%;
+    /* For small screens */
+  }
+}
 
 /* --------- Start Portfolio Area -------------
 .portfolio-area .primary-btn {

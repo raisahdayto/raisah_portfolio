@@ -293,6 +293,7 @@
 
 
 	var portfolioMasonry = function () {
+		// Handle filter clicks
 		$('.filters ul li').click(function () {
 			$('.filters ul li').removeClass('active');
 			$(this).addClass('active');
@@ -303,6 +304,7 @@
 			});
 		});
 
+		// Initialize Isotope
 		if (document.getElementById("section-portfolio")) {
 			var $grid = $(".grid").isotope({
 				itemSelector: ".all",
@@ -315,11 +317,33 @@
 			// Trigger the click event for the first filter (graphics) to show only graphics items by default
 			$('.filters ul li[data-filter=".graphics"]').trigger('click');
 		}
+
+		// Handle image clicks to open the modal
+		$('.carousel-trigger').click(function () {
+			// Get images from the data-images attribute
+			var images = $(this).data('images').split(',');
+
+			// Build carousel items
+			var carouselItems = images.map(function (src, index) {
+				return `
+			  <div class="carousel-item${index === 0 ? ' active' : ''}">
+				<img src="${src}" class="d-block w-100" alt="">
+			  </div>
+			`;
+			}).join('');
+
+			// Populate the carousel with items
+			$('#portfolio-carousel .carousel-inner').html(carouselItems);
+
+			// Show the modal
+			$('#carouselModal').modal('show');
+		});
 	};
 
 	$(document).ready(function () {
 		portfolioMasonry();
 	});
+
 
 
 	$(function () {
