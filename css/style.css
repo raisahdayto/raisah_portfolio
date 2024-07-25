@@ -506,9 +506,14 @@ a:active {
   /* Remove background color if needed */
 }
 
+/* Remove padding from modal body */
 #carouselModal .modal-body {
   padding: 0;
   /* Remove padding if you want a flush fit */
+  max-height: 80vh;
+  /* Set a maximum height for the modal body */
+  overflow-y: auto;
+  /* Add scroll if content exceeds max-height */
 }
 
 /* Center the modal vertically and horizontally */
@@ -519,14 +524,23 @@ a:active {
   justify-content: center;
   /* Horizontally center */
   max-width: 50%;
-  /* Adjust as needed */
+  /* Default max-width */
 }
 
 #carouselModal .modal-content {
   height: auto;
   /* Ensure height adjusts with content */
+  border: none;
+  /* Remove border */
+  border-radius: 0;
+  /* Remove border-radius if you don't want rounded corners */
+  box-shadow: none;
+  /* Remove box-shadow */
+  background: transparent;
+  /* Remove background color if needed */
 }
 
+/* Responsive design for medium and larger screens */
 @media (min-width: 768px) {
   #carouselModal .modal-dialog {
     max-width: 40%;
@@ -534,12 +548,22 @@ a:active {
   }
 }
 
+/* Responsive design for small screens */
 @media (max-width: 767px) {
   #carouselModal .modal-dialog {
     max-width: 100%;
     /* For small screens */
   }
 }
+
+/* Ensure images do not exceed modal body height */
+#carouselModal .carousel-item img {
+  max-height: 80vh;
+  /* Adjust to fit within the viewport */
+  object-fit: contain;
+  /* Maintain aspect ratio and fit within the container */
+}
+
 
 /* --------- Start Portfolio Area -------------
 .portfolio-area .primary-btn {
