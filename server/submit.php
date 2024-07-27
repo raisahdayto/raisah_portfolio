@@ -1,9 +1,5 @@
 <?php
 require '../connect/config.php';
-require '../vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 function jsonResponse($success, $message, $data = [])
 {
@@ -26,33 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bind_param("ssss", $name, $email, $phone, $message);
 
     if ($stmt->execute()) {
-        // Send email using PHPMailer
-        $mail = new PHPMailer(true); // true enables exceptions
-
-        try {
-            //Server settings
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'raisahkamilahdayto@gmail.com'; // Your Gmail address
-            $mail->Password = 'raisahraisahraisah'; // Your Gmail password
-            $mail->SMTPSecure = 'tls'; // Enable TLS encryption
-            $mail->Port = 587; // Adjust as necessary
-
-            //Recipients
-            $mail->setFrom($email, $name); // Set sender's name and email here
-            $mail->addAddress('raisahkamilahdayto@gmail.com', 'Raisah');
-
-            //Content
-            $mail->isHTML(false); // Set to true if sending HTML content
-            $mail->Subject = 'New Message from Get In Touch Form';
-            $mail->Body = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n$message\n";
-
-            $mail->send();
-            jsonResponse(true, "Your message has been sent successfully.");
-        } catch (Exception $e) {
-            jsonResponse(false, "Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-        }
+        jsonResponse(true, "Thank you, $name. Your inquiry is sent to Raisah. We'll get in touch as soon as possible.");
     } else {
         jsonResponse(false, "Failed to save your message. Please try again later.");
     }
@@ -63,3 +33,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
+?>

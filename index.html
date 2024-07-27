@@ -305,47 +305,6 @@
 				</div>
 			</div>
 		</div>
-
-		<script>
-			$(document).ready(function () {
-				function addLandscapeClass() {
-					// Iterate over each image in the carousel
-					$('#portfolio-carousel .carousel-item img').each(function () {
-						var img = $(this);
-						var width = img[0].naturalWidth;
-						var height = img[0].naturalHeight;
-
-						// Check if the image is landscape
-						if (width > height) {
-							img.addClass('landscape');
-						} else {
-							img.removeClass('landscape');
-						}
-					});
-				}
-
-				$('.carousel-trigger').click(function () {
-					// Get images from the data-images attribute
-					var images = $(this).data('images').split(',');
-
-					// Build carousel items
-					var carouselItems = images.map(function (src, index) {
-						return `
-        <div class="carousel-item${index === 0 ? ' active' : ''}">
-          <img src="${src}" class="d-block w-100" alt="">
-        </div>
-      `;
-					}).join('');
-
-					// Populate the carousel with items
-					$('#portfolio-carousel .carousel-inner').html(carouselItems);
-
-					// Show the modal
-					$('#carouselModal').modal('show');
-				});
-			});
-
-		</script>
 		<!-- .section -->
 
 		<!-- 
@@ -569,7 +528,6 @@
 							<p>Web development involves building and maintaining websites and web applications. It
 								includes coding, designing, and optimizing sites for performance and user experience
 								using technologies like HTML, CSS, and JavaScript.</p>
-							<p><a href="#" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
 						</div>
 					</div>
 					<div class="col-md-6 col-lg-4 text-center mb-5">
@@ -582,7 +540,6 @@
 								typography, imagery, and color, graphic designers produce designs for branding,
 								advertising, print, and digital media.
 							</p>
-							<p><a href="#" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
 						</div>
 					</div>
 					<div class="col-md-6 col-lg-4 text-center mb-5">
@@ -594,7 +551,6 @@
 							<p>Social media management entails creating, scheduling, and analyzing content for social
 								platforms. Social media managers develop strategies to boost engagement, monitor trends,
 								and interact with audiences to enhance a brand's online presence.</p>
-							<p><a href="#" class="site-link">Learn More <i class="icon-chevron-right"></i></a></p>
 						</div>
 					</div>
 				</div>
@@ -675,7 +631,7 @@
 					</div>
 
 					<div class="col-md-7 mb-5 mb-md-0">
-						<form id="getInTouch" action="server/submit.php" method="POST" class="site-form">
+						<form id="getInTouch" method="POST" class="site-form">
 							<h3 class="mb-5">Get In Touch</h3>
 							<div class="form-group">
 								<input type="text" name="name" class="form-control px-3 py-4" placeholder="Your Name">
@@ -717,8 +673,22 @@
 					</div>
 				</div>
 			</div>
-		</section>
+			<div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="responseModalLabel">Response</h5>
+						</div>
+						<div class="modal-body" id="responseMessage"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" id="modalCloseButton">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
+		</section>
 
 		<footer class="site-footer">
 			<div class="container">
@@ -753,10 +723,18 @@
 			</div>
 		</footer>
 
+
+
+		<!-- jQuery library -->
 		<script src="js/vendor/jquery.min.js"></script>
+		<!-- jQuery Migrate (if needed) -->
 		<script src="js/vendor/jquery-migrate-3.0.1.min.js"></script>
+		<!-- Popper.js (needed for Bootstrap) -->
 		<script src="js/vendor/popper.min.js"></script>
+		<!-- Bootstrap JavaScript -->
 		<script src="js/vendor/bootstrap.min.js"></script>
+		<!-- Custom Scripts -->
+		<script src="js/custom.js"></script>
 
 		<script src="js/vendor/jquery.easing.1.3.js"></script>
 
@@ -766,6 +744,101 @@
 		<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
 		<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 		<script src="js/custom.js"></script>
+
+		<script>
+			$(document).ready(function () {
+				// Carousel Trigger Click
+				$('.carousel-trigger').click(function () {
+					var images = $(this).data('images').split(',');
+					var carouselItems = images.map(function (src, index) {
+						return `<div class="carousel-item${index === 0 ? ' active' : ''}">
+									<img src="${src}" class="d-block w-100" alt="">
+								</div>`;
+					}).join('');
+					$('#portfolio-carousel .carousel-inner').html(carouselItems);
+					$('#carouselModal').modal('show');
+				});
+
+				// Function to open the response modal
+				function openResponseModal(message, isSuccess) {
+					var modalTitle = isSuccess ? 'Inquiry Sent' : 'Inquiry Incomplete';
+					$('#responseModalLabel').text(modalTitle);
+					$('#responseMessage').text(message);
+
+					var responseModal = new bootstrap.Modal(document.getElementById('responseModal'), {
+						backdrop: 'static',  // Prevents closing the modal by clicking outside
+						keyboard: false      // Prevents closing the modal by pressing the keyboard
+					});
+
+					// Update the behavior of the close button based on success
+					var closeButton = $('#modalCloseButton');
+					if (isSuccess) {
+						closeButton.text('Okay').off('click').on('click', function () {
+							// Navigate to the home section when the close button is clicked
+							window.location.href = '#section-home'; // Navigate to the home section
+							// Close the modal
+							responseModal.hide();
+						});
+					} else {
+						closeButton.text('Close').off('click').on('click', function () {
+							// Close the modal
+							responseModal.hide();
+						});
+					}
+
+					// Show the modal
+					responseModal.show();
+
+					console.log(modalTitle + " Modal opened with message:", message);
+				}
+
+				// Function to clear form data
+				function clearForm() {
+					$('#getInTouch').trigger('reset'); // Reset form fields
+				}
+
+				// Function to clear cookies
+				function clearCookies() {
+					var cookies = document.cookie.split(';');
+					for (var i = 0; i < cookies.length; i++) {
+						var cookie = cookies[i];
+						var eqPos = cookie.indexOf('=');
+						var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+						document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+					}
+				}
+
+				// Form Submission with AJAX
+				$('#getInTouch').on('submit', function (e) {
+					e.preventDefault(); // Prevent the default form submission
+
+					console.log("Form submission triggered");
+
+					$.ajax({
+						url: 'server/submit.php',
+						type: 'POST',
+						data: $(this).serialize(),
+						success: function (response) {
+							console.log("Response received:", response);
+							if (response.success) {
+								// Open the modal with the success message
+								openResponseModal(response.message, true);
+								// Clear form data and cookies
+								clearForm();
+								clearCookies();
+							} else {
+								// Open the modal with the error message
+								openResponseModal(response.message, false);
+							}
+						},
+						error: function () {
+							console.log("Error occurred during form submission");
+							openResponseModal('An error occurred. Please try again later.', false);
+						}
+					});
+				});
+			});
+		</script>
 
 		<!-- Google Map -->
 		<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>

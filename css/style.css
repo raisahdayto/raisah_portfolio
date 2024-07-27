@@ -564,6 +564,100 @@ a:active {
   /* Maintain aspect ratio and fit within the container */
 }
 
+/* Center the modal vertically and horizontally */
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100% - 1rem);
+}
+
+/* General Modal Styling */
+.modal-content {
+  /* Rounded corners */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  /* Box shadow */
+  border-radius: 40px;
+}
+
+/* Ensure the modal header is centered */
+.modal-header {
+  display: flex;
+  justify-content: center;
+  /* Center align items in the header */
+  align-items: center;
+  /* Vertically align items in the center */
+  border-bottom: none;
+  /* Remove bottom border */
+  background-color: #001D3D;
+  /* Light background for header */
+  padding: 1rem;
+  /* Adjust padding if needed */
+}
+
+/* Center the title within the modal header */
+.modal-title {
+  font-weight: bold;
+  /* Make title bold */
+  color: #f8f9fa;
+  /* Blue color for title */
+  margin: 0;
+  /* Remove default margin */
+  text-align: center;
+  /* Center text */
+  width: 100%;
+  /* Ensure it takes full width of the header */
+  border-radius: 40px;
+}
+
+/* Modal Body */
+.modal-body {
+  color: #001D3D;
+  /* Blue color for body text */
+  text-align: center;
+  /* Center-align text in body */
+  border-radius: 40px;
+}
+
+/* Modal Footer */
+.modal-footer {
+  border-top: none;
+  /* Remove top border */
+  background-color: #f8f9fa;
+  /* Light background for footer */
+  justify-content: center;
+  /* Center-align footer content */
+  border-radius: 10px;
+}
+
+/* Modal Close Button */
+#modalCloseButton {
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  color: #fff;
+  /* White text color */
+  background-color: #001D3D;
+  /* Background color */
+  border: none;
+  /* Remove border */
+  border-radius: 20px;
+  /* Rounded corners */
+  padding-left: 20px;
+  padding-right: 20px;
+  /* Padding for the button */
+  text-align: center;
+  /* Center text inside the button */
+  display: inline-block;
+  /* Ensure button is inline */
+}
+
+/* Hover Effect */
+#modalCloseButton:hover {
+  background-color: #002b5e;
+  /* Darker shade for hover */
+}
+
+
 
 /* --------- Start Portfolio Area -------------
 .portfolio-area .primary-btn {
