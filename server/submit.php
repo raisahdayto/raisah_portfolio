@@ -1,6 +1,12 @@
 <?php
 require '../connect/config.php';
 
+// Prevent caching
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+header("Pragma: no-cache"); // HTTP 1.0.
+header("Expires: 0"); // Proxies.
+
+
 function jsonResponse($success, $message, $data = [])
 {
     header('Content-Type: application/json');
@@ -33,4 +39,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 $conn->close();
-?>

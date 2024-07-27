@@ -577,7 +577,7 @@ a:active {
   /* Rounded corners */
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   /* Box shadow */
-  border-radius: 40px;
+  border-radius: 7px;
 }
 
 /* Ensure the modal header is centered */
@@ -607,7 +607,7 @@ a:active {
   /* Center text */
   width: 100%;
   /* Ensure it takes full width of the header */
-  border-radius: 40px;
+  border-radius: 5px;
 }
 
 /* Modal Body */
@@ -616,7 +616,7 @@ a:active {
   /* Blue color for body text */
   text-align: center;
   /* Center-align text in body */
-  border-radius: 40px;
+  border-radius: 5px;
 }
 
 /* Modal Footer */
