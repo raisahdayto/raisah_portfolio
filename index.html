@@ -4,6 +4,7 @@
 <head>
 	<title>Raisah Dayto</title>
 	<meta charset="utf-8">
+	<link rel="icon" href="images/favicon.png" type="favicon.png">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" href="css/animate.css">
 	<link rel="stylesheet" href="css/flexslider.css">
@@ -33,7 +34,8 @@
 		</div>
 	</nav>
 
-	<section class="site-hero" style="background-image: url(images/image_1.jpg);" id="section-home"data-stellar-background-ratio="0.5">
+	<section class="site-hero" style="background-image: url(images/image_1.jpg);" id="section-home"
+		data-stellar-background-ratio="0.5">
 		<div class="container">
 			<div class="row intro-text align-items-center justify-content-center">
 				<div class="col-md-10 text-center pt-5">
@@ -376,7 +378,7 @@
 		</div>
 	</section>
 
-	<section class="site-section" id="section-contact">
+	<!-- <section class="site-section" id="section-contact">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 mb-5">
@@ -442,7 +444,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> -->
 
 	<footer class="site-footer">
 		<div class="container">
@@ -507,96 +509,96 @@
 				$('#carouselModal').modal('show');
 			});
 
-			// Function to open the response modal
-			function openResponseModal(message, isSuccess) {
-				var modalTitle = isSuccess ? 'Inquiry Sent' : 'Inquiry Incomplete';
-				$('#responseModalLabel').text(modalTitle);
-				$('#responseMessage').text(message);
+			// 	// Function to open the response modal
+			// 	function openResponseModal(message, isSuccess) {
+			// 		var modalTitle = isSuccess ? 'Inquiry Sent' : 'Inquiry Incomplete';
+			// 		$('#responseModalLabel').text(modalTitle);
+			// 		$('#responseMessage').text(message);
 
-				var responseModal = new bootstrap.Modal(document.getElementById('responseModal'), {
-					backdrop: 'static',  // Prevents closing the modal by clicking outside
-					keyboard: false      // Prevents closing the modal by pressing the keyboard
-				});
+			// 		var responseModal = new bootstrap.Modal(document.getElementById('responseModal'), {
+			// 			backdrop: 'static',  // Prevents closing the modal by clicking outside
+			// 			keyboard: false      // Prevents closing the modal by pressing the keyboard
+			// 		});
 
-				// Update the behavior of the close button based on success
-				var closeButton = $('#modalCloseButton');
-				if (isSuccess) {
-					closeButton.text('Okay').off('click').on('click', function () {
-						// Set a flag in localStorage to prevent cache issues
-						localStorage.setItem('formSubmitted', 'true');
-						// Redirect to the home section
-						window.location.href = '#section-home';
-						// Close the modal
-						responseModal.hide();
-						// Reload the page to ensure the form cannot be resubmitted
-						window.location.reload(true);
-					});
-				} else {
-					closeButton.text('Close').off('click').on('click', function () {
-						// Close the modal
-						responseModal.hide();
-					});
-				}
+			// 		// Update the behavior of the close button based on success
+			// 		var closeButton = $('#modalCloseButton');
+			// 		if (isSuccess) {
+			// 			closeButton.text('Okay').off('click').on('click', function () {
+			// 				// Set a flag in localStorage to prevent cache issues
+			// 				localStorage.setItem('formSubmitted', 'true');
+			// 				// Redirect to the home section
+			// 				window.location.href = '#section-home';
+			// 				// Close the modal
+			// 				responseModal.hide();
+			// 				// Reload the page to ensure the form cannot be resubmitted
+			// 				window.location.reload(true);
+			// 			});
+			// 		} else {
+			// 			closeButton.text('Close').off('click').on('click', function () {
+			// 				// Close the modal
+			// 				responseModal.hide();
+			// 			});
+			// 		}
 
-				// Show the modal
-				responseModal.show();
+			// 		// Show the modal
+			// 		responseModal.show();
 
-				console.log(modalTitle + " Modal opened with message:", message);
-			}
+			// 		console.log(modalTitle + " Modal opened with message:", message);
+			// 	}
 
-			// Function to clear form data
-			function clearForm() {
-				$('#getInTouch').trigger('reset'); // Reset form fields
-			}
+			// 	// Function to clear form data
+			// 	function clearForm() {
+			// 		$('#getInTouch').trigger('reset'); // Reset form fields
+			// 	}
 
-			// Function to clear cookies
-			function clearCookies() {
-				var cookies = document.cookie.split(';');
-				for (var i = 0; i < cookies.length; i++) {
-					var cookie = cookies[i];
-					var eqPos = cookie.indexOf('=');
-					var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-					document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-				}
-			}
+			// 	// Function to clear cookies
+			// 	function clearCookies() {
+			// 		var cookies = document.cookie.split(';');
+			// 		for (var i = 0; i < cookies.length; i++) {
+			// 			var cookie = cookies[i];
+			// 			var eqPos = cookie.indexOf('=');
+			// 			var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+			// 			document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+			// 		}
+			// 	}
 
-			// Form Submission with AJAX
-			$('#getInTouch').on('submit', function (e) {
-				e.preventDefault(); // Prevent the default form submission
+			// 	// Form Submission with AJAX
+			// 	$('#getInTouch').on('submit', function (e) {
+			// 		e.preventDefault(); // Prevent the default form submission
 
-				console.log("Form submission triggered");
+			// 		console.log("Form submission triggered");
 
-				$.ajax({
-					url: 'server/submit.php',
-					type: 'POST',
-					data: $(this).serialize(),
-					success: function (response) {
-						console.log("Response received:", response);
-						if (response.success) {
-							// Open the modal with the success message
-							openResponseModal(response.message, true);
-							// Clear form data and cookies
-							clearForm();
-							clearCookies();
-						} else {
-							// Open the modal with the error message
-							openResponseModal(response.message, false);
-						}
-					},
-					error: function () {
-						console.log("Error occurred during form submission");
-						openResponseModal('An error occurred. Please try again later.', false);
-					}
-				});
-			});
+			// 		$.ajax({
+			// 			url: 'server/submit.php',
+			// 			type: 'POST',
+			// 			data: $(this).serialize(),
+			// 			success: function (response) {
+			// 				console.log("Response received:", response);
+			// 				if (response.success) {
+			// 					// Open the modal with the success message
+			// 					openResponseModal(response.message, true);
+			// 					// Clear form data and cookies
+			// 					clearForm();
+			// 					clearCookies();
+			// 				} else {
+			// 					// Open the modal with the error message
+			// 					openResponseModal(response.message, false);
+			// 				}
+			// 			},
+			// 			error: function () {
+			// 				console.log("Error occurred during form submission");
+			// 				openResponseModal('An error occurred. Please try again later.', false);
+			// 			}
+			// 		});
+			// 	});
 
-			// Handle page load to check if the form was previously submitted
-			if (localStorage.getItem('formSubmitted') === 'true') {
-				// Redirect to the home section
-				window.location.href = '#section-home';
-				// Remove the flag from localStorage
-				localStorage.removeItem('formSubmitted');
-			}
+			// 	// Handle page load to check if the form was previously submitted
+			// 	if (localStorage.getItem('formSubmitted') === 'true') {
+			// 		// Redirect to the home section
+			// 		window.location.href = '#section-home';
+			// 		// Remove the flag from localStorage
+			// 		localStorage.removeItem('formSubmitted');
+			// 	}
 		});
 	</script>
 </body>
